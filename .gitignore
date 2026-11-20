@@ -1,0 +1,9 @@
+.DS_Store
+.vercel
+.env*.local
+.vscode
+.agents
+dist
+node_modules
+__pycache__/
+*.pyc

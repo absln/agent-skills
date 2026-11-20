@@ -1,0 +1,14 @@
+{
+  "name": "agent-capture",
+  "version": "0.1.0",
+  "private": true,
+  "description": "网页操作录制器：启动浏览器让用户执行操作，忠实记录网络交互（请求/头/Cookie/响应/跳转），导出 NDJSON 供 AI Agent 分析（认证画像/API 端点/操作流程）。",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "analyze": "node scripts/analyze.mjs"
+  },
+  "devDependencies": {
+    "electron": "43.3.0"
+  }
+}

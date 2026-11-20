@@ -1,0 +1,52 @@
+// product_owner.jsonc — 商品归属 — 关联表示例（双边 ref + 业务属性 → 继承 $base）
+// 规范依据：SKILL.md §15.7
+{
+  "title": "product_owner",
+  "description": "商品归属 — 关联表示例（双边 ref + 业务属性 → 继承 $base）",
+  "type": "object",
+  "$base": ["base"],
+  "properties": {
+    "id": {
+      "type": "bigserial",
+      "required": true,
+      "primary": true,
+      "description": "主键",
+      "order": 1
+    },
+    "product_id": {
+      "type": "bigint",
+      "required": true,
+      "primary": false,
+      "ref": {
+        "entity": "product",
+        "property": "id"
+      },
+      "description": "商品ID",
+      "order": 10
+    },
+    "user_id": {
+      "type": "bigint",
+      "required": true,
+      "primary": false,
+      "ref": {
+        "entity": "user",
+        "property": "id"
+      },
+      "description": "用户ID",
+      "order": 20
+    },
+    "position": {
+      "type": "character varying(50)",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "在该商品下的角色，如 owner/operator",
+      "order": 30
+    }
+  },
+  "required": ["id", "product_id", "user_id"]
+}
+
+// ── 设计要点 ──
+// 判据是**有没有业务属性**：只有两个 FK 的纯多对多不继承 `$base`；一旦带 `position` 这种属性就要继承，因为属性本身需要审计。
+// 主键仍用 `id` 而非联合主键，便于后续单行更新与外部引用。

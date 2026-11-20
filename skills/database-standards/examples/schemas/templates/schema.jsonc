@@ -1,0 +1,83 @@
+{
+  // "$schema": "https://json-schema.org/draft/2020-12/schema",
+  // "$id": "https://example.com/product.schema.json",
+  "title": "schema",
+  "description": "常用的业务表通过 $base=\"schema\"继承",
+  "type": "object",
+  "hidden": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "名称",
+      "order": 995
+    },
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "标题",
+      "order": 996
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "Schema 描述",
+      "order": 3
+    },
+    "type": {
+      "type": "character varying(50)",
+      "required": false,
+      "default": "base",
+      "primary": false,
+      "description": "Schema 类型  base/tree",
+      "order": 4
+    },
+    "create_time": {
+      "type": "timestamp without time zone",
+      "required": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary": false,
+      "description": "创建时间",
+      "order": 995
+    },
+    "update_time": {
+      "type": "timestamp without time zone",
+      "required": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary": false,
+      "description": "更新时间",
+      "order": 996
+    },
+    "create_by": {
+      "type": "bigint",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "创建用户 ID",
+      "order": 997
+    },
+    "update_by": {
+      "type": "bigint",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "更新用户 ID",
+      "order": 998
+    },
+    "status": {
+      "type": "smallint",
+      "required": false,
+      "default": "1",
+      "primary": false,
+      "description": "状态: 0=Init, 1=Active, 50=InActive, 100=Deleted",
+      "order": 999
+    }
+  },
+  "required": ["create_time", "status"]
+}

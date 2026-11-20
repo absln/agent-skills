@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>Agent Capture</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #18181b; color: #fafafa; }
+    .wrap { padding: 20px; max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 18px; margin: 0 0 4px; }
+    p.sub { color: #a1a1aa; font-size: 12px; margin: 0 0 16px; }
+    label { display: block; font-size: 12px; color: #a1a1aa; margin: 8px 0 4px; }
+    input[type=text] { width: 100%; box-sizing: border-box; padding: 8px; border-radius: 6px;
+      border: 1px solid #3f3f46; background: #27272a; color: #fafafa; font-size: 13px; }
+    .row { display: flex; gap: 8px; margin-top: 12px; }
+    button { padding: 8px 14px; border-radius: 6px; border: 1px solid #3f3f46; background: #3f3f46;
+      color: #fafafa; cursor: pointer; font-size: 13px; }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    button.primary { background: #2563eb; border-color: #2563eb; }
+    .stats { display: flex; gap: 16px; margin: 14px 0; }
+    .stat { background: #27272a; border-radius: 8px; padding: 10px 14px; flex: 1; text-align: center; }
+    .stat .n { font-size: 20px; font-weight: 600; }
+    .stat .l { font-size: 11px; color: #a1a1aa; }
+    #status { font-size: 12px; color: #a1a1aa; margin-top: 10px; white-space: pre-wrap; }
+    .hint { margin-top: 16px; border-top: 1px solid #3f3f46; padding-top: 12px; font-size: 12px; color: #a1a1aa; line-height: 1.6; }
+    code { background: #27272a; padding: 1px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Agent Capture</h1>
+    <p class="sub">网页操作录制器：打开浏览器窗口，你执行操作，应用记录网络交互，导出供 AI 分析。</p>
+
+    <label>目标 URL（如 https://aistudio.xiaomimimo.com）</label>
+    <input type="text" id="url" value="https://aistudio.xiaomimimo.com" placeholder="https://..." />
+
+    <div class="row">
+      <button class="primary" id="start">开始抓包并打开浏览器</button>
+      <button id="stop" disabled>停止并保存</button>
+      <button id="openOut">打开输出目录</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n" id="nReq">0</div><div class="l">请求</div></div>
+      <div class="stat"><div class="n" id="nHdr">0</div><div class="l">请求头</div></div>
+      <div class="stat"><div class="n" id="nResp">0</div><div class="l">响应</div></div>
+      <div class="stat"><div class="n" id="nRedir">0</div><div class="l">跳转</div></div>
+    </div>
+
+    <div id="status"></div>
+
+    <div class="hint">
+      1. 填目标 URL → 点「开始」。<br />
+      2. 在抓包窗口里：<b>登录</b> → 执行你要分析的操作（如新建对话并发一条消息）。<br />
+      3. 点「停止」→ 打开输出目录，把 <code>capture-*.ndjson</code> 交给 AI 分析。<br />
+      <br />
+      每次抓包用独立会话分区，登录态不跨次；如需复用，告知可将分区名固定。
+    </div>
+  </div>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>

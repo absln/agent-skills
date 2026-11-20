@@ -1,0 +1,63 @@
+// product.jsonc — 商品 — 标准业务表示例（$base 继承 + 外键引用）
+// 规范依据：SKILL.md §12 行1、§4
+{
+  "title": "product",
+  "description": "商品 — 标准业务表示例（$base 继承 + 外键引用）",
+  "type": "object",
+  "$base": ["base"],
+  "properties": {
+    "id": {
+      "type": "bigserial",
+      "required": true,
+      "primary": true,
+      "description": "主键",
+      "order": 1
+    },
+    "category_id": {
+      "type": "bigint",
+      "required": false,
+      "primary": false,
+      "ref": {
+        "entity": "category",
+        "property": "id"
+      },
+      "description": "所属分类ID",
+      "order": 10
+    },
+    "code": {
+      "type": "character varying(50)",
+      "required": true,
+      "primary": false,
+      "description": "商品编码，业务唯一",
+      "order": 20
+    },
+    "name": {
+      "type": "character varying(100)",
+      "required": true,
+      "primary": false,
+      "description": "商品名称",
+      "order": 30
+    },
+    "price": {
+      "type": "numeric(12,2)",
+      "required": false,
+      "default": "0",
+      "primary": false,
+      "description": "售价",
+      "order": 40
+    },
+    "description": {
+      "type": "text",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "商品描述",
+      "order": 50
+    }
+  },
+  "required": ["id", "code", "name"]
+}
+
+// ── 设计要点 ──
+// 这是**新表的标准骨架**：`$base` + 主键 `id` + 业务字段 + 外键 `{entity}_id`。
+// 外键字段类型必须与目标主键一致（目标 `bigserial` → 此处 `bigint`），否则 JOIN 会隐式转换、丢索引。

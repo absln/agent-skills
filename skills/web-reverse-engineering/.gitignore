@@ -1,0 +1,4 @@
+# 录制产物可能含敏感 Cookie / Authorization，勿提交
+out/
+node_modules/
+*.ndjson

@@ -1,0 +1,51 @@
+// dict.jsonc — 数据字典 — key-value + parent 字符串分组
+// 规范依据：SKILL.md §15.3
+{
+  "title": "dict",
+  "description": "数据字典 — key-value + parent 字符串分组",
+  "type": "object",
+  "$base": ["base"],
+  "properties": {
+    "id": {
+      "type": "bigserial",
+      "required": true,
+      "primary": true,
+      "description": "主键",
+      "order": 1
+    },
+    "parent": {
+      "type": "character varying(50)",
+      "required": true,
+      "primary": false,
+      "description": "分组标识，如 gender / order_status",
+      "order": 10
+    },
+    "key": {
+      "type": "character varying(50)",
+      "required": true,
+      "primary": false,
+      "description": "字典键",
+      "order": 20
+    },
+    "value": {
+      "type": "character varying(100)",
+      "required": true,
+      "primary": false,
+      "description": "字典值",
+      "order": 30
+    },
+    "sort": {
+      "type": "integer",
+      "required": false,
+      "default": "0",
+      "primary": false,
+      "description": "组内排序号",
+      "order": 40
+    }
+  },
+  "required": ["id", "parent", "key", "value"]
+}
+
+// ── 设计要点 ──
+// `parent` 用字符串不用外键：分组名是业务语义（`gender`），不是独立实体，没必要为它建表。
+// 需要层级字典时才改用 `parent_id` 自引用，参考 `category.jsonc`。

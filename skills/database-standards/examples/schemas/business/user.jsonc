@@ -1,0 +1,54 @@
+// user.jsonc — 用户 — 标准业务表示例（无外键，作为关联表引用目标）
+// 规范依据：SKILL.md §8 命名规范
+{
+  "title": "user",
+  "description": "用户 — 标准业务表示例（无外键，作为关联表引用目标）",
+  "type": "object",
+  "$base": ["base"],
+  "properties": {
+    "id": {
+      "type": "bigserial",
+      "required": true,
+      "primary": true,
+      "description": "主键",
+      "order": 1
+    },
+    "username": {
+      "type": "character varying(50)",
+      "required": true,
+      "primary": false,
+      "description": "登录名，业务唯一",
+      "order": 10
+    },
+    "nick_name": {
+      "type": "character varying(50)",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "昵称",
+      "order": 20
+    },
+    "email": {
+      "type": "character varying(100)",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "邮箱",
+      "order": 30
+    },
+    "mobile_phone": {
+      "type": "character varying(20)",
+      "required": false,
+      "default": "",
+      "primary": false,
+      "description": "手机号",
+      "order": 40
+    }
+  },
+  "required": ["id", "username"]
+}
+
+// ── 设计要点 ──
+// 注意字段命名：`mobile_phone` 而非 `phone`，`email` 而非 `mail`——用完整语义名，别省字母。
+// **不要**写 `uid` / `cid` / `pid` 这类缩写主键或外键，规范要求主键统一 `id`、外键统一 `{entity}_id`。
+// 密码、salt、登录失败次数等认证字段不放这里，避免用户表随认证策略变更而频繁迁移。

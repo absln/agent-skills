@@ -1,0 +1,38 @@
+name: Publish skills
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+      - 'scripts/build-discovery-index.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Resolve release tag
+        id: tag
+        run: echo "name=skills-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Build discovery index
+        run: node scripts/build-discovery-index.mjs "https://github.com/${{ github.repository }}/releases/download/${{ steps.tag.outputs.name }}"
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ steps.tag.outputs.name }}" dist/* --title "Skills ${{ steps.tag.outputs.name }}" --notes "Discovery index and skill artifacts built from ${{ github.sha }}."

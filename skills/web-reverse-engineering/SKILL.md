@@ -214,7 +214,6 @@ pnpm start -- --mode=run --platform=<platform> \
 | 动态签名头被静态存 | 首次成功后续全失败 | 标记为 dynamic header，每次现取 |
 | `http.post` 未发 body | `create` 成功但 `update` 报"参数错误" | 确认 ScriptRunner 的 `post` 兼容 body 对象（已修复） |
 | 必填项未识别 | 平台有必填字段但 schema 未标 `required` | 用不同字段组合实测确定必填项 |
-| 块注释嵌套 `*/` | 脚本语法错 | 避免在 `/* */` 内写含 `*/` 的 markdown |
 | 把 `login.js` 当执行版 | 期望它发请求却只返回定义 | 真正发包的是 `publish.js` |
 
 ## 输出

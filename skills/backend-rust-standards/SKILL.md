@@ -118,7 +118,6 @@ reorder_imports = true
 
 - CI 运行 `cargo clippy --all-targets -- -D warnings`
 - 可配置 `clippy.toml` 调整规则阈值
-- 禁止在代码中使用 `#[allow(clippy::...)]` 全局压制，例外需注释原因
 
 ---
 

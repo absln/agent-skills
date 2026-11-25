@@ -450,7 +450,6 @@ class Settings(BaseSettings):
 | 异常不吞 | 无 `except: pass`，所有 IO 有 try/except |
 | 无硬编码 | 配置从 Settings / 环境变量读取 |
 | 函数长度 | 单函数 ≤ 50 行 |
-| 无 dead code | 无被注释的代码块，无未使用的 import |
 
 
 ## 完整模板索引

@@ -125,7 +125,7 @@ description: HTTP 接口开发规范 — 对齐 OpenAPI 3.1 与 RFC 9110，覆�
 | `operationId` | 稳定标识（供前端代码生成/引用） |
 | `tags` | 业务域分组：会话/对话/模型配置/技能/认证/工作目录/系统 |
 | `summary` + `description` | 中文；含请求体与响应说明 |
-| 参数 `description` | 中文，逐个补齐（不靠实现层注释代偿） |
+|  `description` |  逐个补齐（不靠实现层注释代偿） |
 | `schema` | 请求体/响应需有 `description`，关键字段补 `example` |
 | 废弃接口 | `deprecated: true`（不再用删除线文本） |
 

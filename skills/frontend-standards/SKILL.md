@@ -243,9 +243,8 @@ export interface ApiError {
 
 ### 7.1 基本原则
 
-- **禁止 `any` 类型**，除非有明确注释说明理由且标记 `HACK`。
 - 所有函数参数和返回值必须声明类型。
-- API 返回数据类型必须与后端 schema 一致，参考 `docs/schemas/` 下的 JSONC 文件。
+- API 返回数据类型必须与后端schema一致。
 
 ### 7.2 类型定义位置
 
@@ -416,7 +415,6 @@ web/src/
 | 函数行数 | 单函数 ≤ 50 行 | 人工检查 |
 | 错误处理 | 所有异步调用有 try-catch | Code Review |
 | 无硬编码 | 配置、URL、密钥从环境变量/配置文件读取 | Code Review |
-| 注释覆盖 | Service 和 Store 的公开方法有注释 | Code Review |
 | 可访问性 | 图标按钮有 `aria-label`，表单控件有关联标签，焦点可见 | Code Review（见 §14） |
 | 界面质量 | 无 §14.1 反模式速查表中的命中项 | Code Review（见 §14） |
 

@@ -148,7 +148,7 @@ description: 软件系统 UI 原型设计——从需求/设计文档或参考�
 
 ### 必须
 
-- **Token 先行**：所有颜色/字号/间距走 CSS 变量，`:root` 里定义一次；组件里不写裸色值（语义化例外可加注释）。
+- **Token 先行**：所有颜色/字号/间距走 CSS 变量，`:root` 里定义一次；组件里不写裸色值（语义化例外）。
 - **等比缩放**：`html{font-size:clamp(8px,calc(100vw/N),16px)}` + 全量 `rem`（N 为设计宽度/16）。禁止整体 `transform:scale` 与 `zoom`。
 - **单文件自包含**：CSS 内联、图标用内联 SVG（stroke 用 `currentColor` 便于状态切换）、JS 用原生，不引 CDN。
 - **页面切换**：`data-page` 属性 + 极简 JS 切 `.page.active`，不引入框架。
